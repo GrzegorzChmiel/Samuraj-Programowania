@@ -1,7 +1,5 @@
-declare var require: any
-
-var React = require('react');
-var ReactDOM = require('react-dom');
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 class App extends React.Component {
    state = {
