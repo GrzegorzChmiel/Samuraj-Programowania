@@ -37,6 +37,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Content Include="App\index.html" />
+    <Content Include="App\style.css" />
     <Content Include="dist\app-bundle.js.map" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json">
