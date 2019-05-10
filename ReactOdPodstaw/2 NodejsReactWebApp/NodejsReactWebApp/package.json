@@ -7,6 +7,8 @@
       "name": ""
    },
    "dependencies": {
+      "@types/react": "^16.8.17",
+      "@types/react-dom": "^16.8.4",
       "express": "^4.16.4",
       "path": "^0.12.7",
       "react": "^16.8.6",
@@ -20,5 +22,9 @@
       "build:dev": "webpack App\\App.tsx --config webpack-config.js",
       "build:prod": "webpack App\\App.tsx --config webpack-config.js"
    },
-   "-vs-binding": { "AfterBuild": [ "build:dev" ] }
+   "-vs-binding": {
+      "AfterBuild": [
+         "build:dev"
+      ]
+   }
 }
