@@ -95,10 +95,85 @@
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-var elementsToRender = [];
-ReactDOM.render(elementsToRender, document.getElementById("root"));
+/*
+ * Komponent funkcyjny Header.
+ */
+var Header = function () { return React.createElement("h1", null, "Witaj na stronie"); };
+/*
+ * Komponent stanowy Article.
+ */
+var Article = /** @class */ (function (_super) {
+    __extends(Article, _super);
+    function Article() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.render = function () {
+            return React.createElement("p", null, "Tresc artykulu.");
+        };
+        return _this;
+    }
+    return Article;
+}(React.Component));
+/*
+ * Komponent stanowy Sekcja. Zagnie�d�a w sobie komponent Article.
+ */
+var Section = /** @class */ (function (_super) {
+    __extends(Section, _super);
+    function Section() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            inner_state1: 2,
+            inner_state2: 3
+        };
+        return _this;
+    }
+    Section.prototype.render = function () {
+        return (React.createElement(React.Fragment, null,
+            React.createElement(Article, null),
+            React.createElement("p", null,
+                "Obiekt ",
+                React.createElement("b", null, "state"),
+                " komponentu stanowego ",
+                React.createElement("b", null, "Section"),
+                " ma wlasnosc ",
+                React.createElement("b", null, "state.inner_state1"),
+                " o wartosci: ",
+                this.state.inner_state1,
+                " oraz wlasnosc ",
+                React.createElement("b", null, "inner_state2"),
+                " o wartosci: ",
+                this.state.inner_state2,
+                ".")));
+    };
+    return Section;
+}(React.Component));
+/*
+ * Komponent funkcyjny Blog - przez zagnie�d�enie spina ca�� reszt� komponent�w. Jest g��wnym komponentem.
+ */
+var Blog = function () {
+    return (React.createElement(React.Fragment, null,
+        React.createElement(Header, null),
+        React.createElement(Section, null)));
+};
+/*
+ * Renderowanie g��wnego komponentu.
+ */
+ReactDOM.render(React.createElement(Blog, null), document.getElementById("root"));
 
 
 /***/ }),
