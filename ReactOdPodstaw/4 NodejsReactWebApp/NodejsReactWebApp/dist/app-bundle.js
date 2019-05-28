@@ -95,12 +95,65 @@
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /*
- * Renderowanie g��wnego komponentu.
+ * Lista jako komponent stanowy
  */
-ReactDOM.render([], document.getElementById("root"));
+var ShoppingList = /** @class */ (function (_super) {
+    __extends(ShoppingList, _super);
+    function ShoppingList() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            item1: { name: "pozycja1", count: 2 },
+            item2: { name: "pozycja2", count: 3 },
+            item3: { name: "pozycja3", count: 5 }
+        };
+        return _this;
+    }
+    ShoppingList.prototype.render = function () {
+        return (React.createElement(React.Fragment, null,
+            React.createElement("h1", null, "Lista zakupow"),
+            React.createElement("ul", null,
+                React.createElement(ShoppingListItem, { name: this.state.item1.name, count: this.state.item1.count }),
+                React.createElement(ShoppingListItem, { name: this.state.item2.name, count: this.state.item2.count }),
+                React.createElement(ShoppingListItem, { name: this.state.item3.name, count: this.state.item3.count }))));
+    };
+    return ShoppingList;
+}(React.Component));
+var ShoppingListItem = /** @class */ (function (_super) {
+    __extends(ShoppingListItem, _super);
+    function ShoppingListItem() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ShoppingListItem.prototype.render = function () {
+        return React.createElement("li", null,
+            "Pozycja o nazwie: ",
+            this.props.name,
+            " i ilosci: ",
+            this.props.count,
+            ".");
+    };
+    return ShoppingListItem;
+}(React.Component));
+/*
+ * Renderowanie glownego komponentu.
+ */
+ReactDOM.render(React.createElement(ShoppingList, null), document.getElementById("root"));
 
 
 /***/ }),
