@@ -111,49 +111,48 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/*
- * Lista jako komponent stanowy
- */
-var ShoppingList = /** @class */ (function (_super) {
-    __extends(ShoppingList, _super);
-    function ShoppingList() {
+//class App extends React.Component<{}, AppState> {
+var App = /** @class */ (function (_super) {
+    __extends(App, _super);
+    function App() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            item1: { name: "pozycja1", count: 2 },
-            item2: { name: "pozycja2", count: 3 },
-            item3: { name: "pozycja3", count: 5 }
+            text: ""
         };
         return _this;
     }
-    ShoppingList.prototype.render = function () {
-        return (React.createElement(React.Fragment, null,
-            React.createElement("h1", null, "Lista zakupow"),
-            React.createElement("ul", null,
-                React.createElement(ShoppingListItem, { name: this.state.item1.name, count: this.state.item1.count }),
-                React.createElement(ShoppingListItem, { name: this.state.item2.name, count: this.state.item2.count }),
-                React.createElement(ShoppingListItem, { name: this.state.item3.name, count: this.state.item3.count }))));
-    };
-    return ShoppingList;
-}(React.Component));
-var ShoppingListItem = /** @class */ (function (_super) {
-    __extends(ShoppingListItem, _super);
-    function ShoppingListItem() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    /*
+    handleClick() {
+       this.setState(() => {
+          return {
+             text: this.state.text + "A"
+          };
+       });
     }
-    ShoppingListItem.prototype.render = function () {
-        return React.createElement("li", null,
-            "Pozycja o nazwie: ",
-            this.props.name,
-            " i ilosci: ",
-            this.props.count,
-            ".");
+    */
+    /*
+    handleClick() {
+       this.setState(() => ({
+          text: this.state.text + "A"
+       })
+       )
+    }
+    */
+    App.prototype.handleClick = function () {
+        this.setState(function (prevState) {
+            return {
+                text: prevState.text + "A"
+            };
+        });
     };
-    return ShoppingListItem;
+    App.prototype.render = function () {
+        return (React.createElement(React.Fragment, null,
+            React.createElement("button", { onClick: this.handleClick.bind(this) }, "Dodaj \"A\""),
+            React.createElement("h1", null, this.state.text)));
+    };
+    return App;
 }(React.Component));
-/*
- * Renderowanie glownego komponentu.
- */
-ReactDOM.render(React.createElement(ShoppingList, null), document.getElementById("root"));
+ReactDOM.render(React.createElement(App, null), document.getElementById("root"));
 
 
 /***/ }),

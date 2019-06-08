@@ -1,9 +1,54 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+interface AppState {
+   text: string
+}
 
+interface AppProps {
 
-/*
- * Renderowanie glownego komponentu.
- */
-ReactDOM.render([], document.getElementById("root"));
+}
+//class App extends React.Component<{}, AppState> {
+class App extends React.Component<AppProps, AppState> {
+   state = {
+      text: ""
+   };
+
+   /*
+   handleClick() {
+      this.setState(() => {
+         return {
+            text: this.state.text + "A"
+         };
+      });
+   }
+   */
+
+   /*
+   handleClick() {
+      this.setState(() => ({
+         text: this.state.text + "A"
+      })
+      )
+   }
+   */
+
+   handleClick() {
+      this.setState((prevState) => {
+         return {
+            text: prevState.text + "A"
+         }
+      })
+   }
+
+   render() {
+      return (
+         <React.Fragment>
+            <button onClick={this.handleClick.bind(this)}>Dodaj "A"</button>
+            <h1>{this.state.text}</h1>
+         </React.Fragment>
+      );
+   }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
