@@ -10,9 +10,21 @@ interface AppProps {
 }
 //class App extends React.Component<{}, AppState> {
 class App extends React.Component<AppProps, AppState> {
+   constructor(props) {
+      super(props)
+
+      this.state = {
+         text: ""
+      }
+
+      this.handleClick = this.handleClick.bind(this);
+   }
+
+   /*
    state = {
       text: ""
    };
+   */
 
    /*
    handleClick() {
@@ -44,7 +56,8 @@ class App extends React.Component<AppProps, AppState> {
    render() {
       return (
          <React.Fragment>
-            <button onClick={this.handleClick.bind(this)}>Dodaj "A"</button>
+            {/*<button onClick={this.handleClick.bind(this)}>Dodaj "A"</button>*/}
+            <button onClick={this.handleClick}>Dodaj "A"</button>
             <h1>{this.state.text}</h1>
          </React.Fragment>
       );

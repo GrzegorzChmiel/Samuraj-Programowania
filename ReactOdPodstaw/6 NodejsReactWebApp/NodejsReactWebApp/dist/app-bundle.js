@@ -114,13 +114,19 @@ var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/in
 //class App extends React.Component<{}, AppState> {
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
-    function App() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function App(props) {
+        var _this = _super.call(this, props) || this;
         _this.state = {
             text: ""
         };
+        _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
+    /*
+    state = {
+       text: ""
+    };
+    */
     /*
     handleClick() {
        this.setState(() => {
@@ -147,7 +153,7 @@ var App = /** @class */ (function (_super) {
     };
     App.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
-            React.createElement("button", { onClick: this.handleClick.bind(this) }, "Dodaj \"A\""),
+            React.createElement("button", { onClick: this.handleClick }, "Dodaj \"A\""),
             React.createElement("h1", null, this.state.text)));
     };
     return App;
