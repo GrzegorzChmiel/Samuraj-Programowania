@@ -1,1 +1,0 @@
-Solucja dla lekcji: 10. Komponenty - tworzenie komponentów funkcyjnych i klasowych
