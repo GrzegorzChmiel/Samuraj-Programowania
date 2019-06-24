@@ -21,9 +21,10 @@ class Message extends React.Component<{}, stateDefifition> {
    }
 
    buttonClickHandler() {
-      this.setState({
-         messageIsActive: !this.state.messageIsActive
-      })
+      debugger
+      this.setState((prevState) => ({
+         messageIsActive: !prevState.messageIsActive
+      }))
    }
 
    setButtonValue = () => {

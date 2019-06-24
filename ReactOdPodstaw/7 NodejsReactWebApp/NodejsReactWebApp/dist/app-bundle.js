@@ -126,9 +126,10 @@ var Message = /** @class */ (function (_super) {
         return _this;
     }
     Message.prototype.buttonClickHandler = function () {
-        this.setState({
-            messageIsActive: !this.state.messageIsActive
-        });
+        debugger;
+        this.setState(function (prevState) { return ({
+            messageIsActive: !prevState.messageIsActive
+        }); });
     };
     Message.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
