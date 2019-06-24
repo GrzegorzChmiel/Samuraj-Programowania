@@ -95,9 +95,49 @@
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-ReactDOM.render([], document.getElementById("root"));
+var Message = /** @class */ (function (_super) {
+    __extends(Message, _super);
+    function Message(props) {
+        var _this = _super.call(this, props) || this;
+        _this.setButtonValue = function () {
+            return _this.state.messageIsActive ? "Ukryj" : "Pokaz";
+        };
+        _this.state = {
+            messageIsActive: false
+        };
+        _this.messageText = "Testowy tekst paragrafu";
+        _this.clickHandler = _this.buttonClickHandler.bind(_this);
+        return _this;
+    }
+    Message.prototype.buttonClickHandler = function () {
+        this.setState({
+            messageIsActive: !this.state.messageIsActive
+        });
+    };
+    Message.prototype.render = function () {
+        return (React.createElement(React.Fragment, null,
+            React.createElement("button", { onClick: this.clickHandler }, this.setButtonValue()),
+            this.state.messageIsActive && React.createElement("p", null, this.messageText)));
+    };
+    return Message;
+}(React.Component));
+ReactDOM.render(React.createElement(Message, null), document.getElementById("root"));
 
 
 /***/ }),
