@@ -1,17 +1,14 @@
 body {
-   text-align: center;
-   overflow: hidden;
+   margin: 20px;
+   font-family: roboto, sans-serif;
+   font-size: 20px;
 }
 
-.title {
-   font-family: arial;
-   padding: 30px;
-   font-size: 50px;
+h1 {
+   font-style: normal;
+   font-size: 32px;
 }
 
-input[type="text"], button {
-   padding: 10px 30px;
-   border: black 2px solid;
-   font-size: 30px;
-   outline: none;
+button {
+   font-size: 24px;
 }
