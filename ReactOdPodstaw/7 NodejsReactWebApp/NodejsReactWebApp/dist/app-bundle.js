@@ -95,82 +95,9 @@
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-var Counter = /** @class */ (function (_super) {
-    __extends(Counter, _super);
-    function Counter() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            count: 0,
-            result: _this.props.initialResult
-        };
-        return _this;
-    }
-    Counter.prototype.handleMathClick = function (type, number) {
-        var _this = this;
-        switch (type) {
-            case "subtraction":
-                this.setState(function (prevState) { return _this.makeSubtraction(prevState, number); });
-                break;
-            case "addition":
-                this.setState(function (prevState) { return _this.makeAddition(prevState, number); });
-                break;
-            default:
-                //Reset
-                this.setState(function (prevState) { return _this.makeReset(prevState, number); });
-        }
-    };
-    Counter.prototype.makeAddition = function (prevState, number) {
-        return ({
-            count: prevState.count + 1,
-            result: prevState.result + number
-        });
-    };
-    Counter.prototype.makeSubtraction = function (prevState, number) {
-        return ({
-            count: prevState.count + 1,
-            result: prevState.result - number
-        });
-    };
-    Counter.prototype.makeReset = function (prevState, number) {
-        return ({
-            count: prevState.count + 1,
-            result: 0
-        });
-    };
-    Counter.prototype.render = function () {
-        return (React.createElement(React.Fragment, null,
-            React.createElement("button", { onClick: this.handleMathClick.bind(this, "subtraction", 10) }, "-10"),
-            React.createElement("button", { onClick: this.handleMathClick.bind(this, "subtraction", 1) }, "-1"),
-            React.createElement("button", { onClick: this.handleMathClick.bind(this, "reset") }, "Reset"),
-            React.createElement("button", { onClick: this.handleMathClick.bind(this, "addition", 1) }, "+1"),
-            React.createElement("button", { onClick: this.handleMathClick.bind(this, "addition", 10) }, "+10"),
-            React.createElement("h1", null,
-                "Ilosc klikniec: ",
-                this.state.count),
-            React.createElement("h1", null,
-                "Rezultat: ",
-                this.state.result)));
-    };
-    return Counter;
-}(React.Component));
-var initialResult = 8;
-ReactDOM.render(React.createElement(Counter, { initialResult: initialResult }), document.getElementById("root"));
+ReactDOM.render([], document.getElementById("root"));
 
 
 /***/ }),
