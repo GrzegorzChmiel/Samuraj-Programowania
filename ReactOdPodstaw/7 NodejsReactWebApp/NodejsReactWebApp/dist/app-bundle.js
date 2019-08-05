@@ -193,18 +193,25 @@ var Counter = /** @class */ (function (_super) {
             React.createElement(MathButton, { text: "Reset", type: "reset", clickHandler: this.handleMathClick }),
             React.createElement(MathButton, { text: "+1", type: "addition", number: "1", clickHandler: this.handleMathClick }),
             React.createElement(MathButton, { text: "+10", type: "addition", number: "10", clickHandler: this.handleMathClick }),
-            React.createElement("h1", null,
-                "Ilosc klikniec: ",
-                this.state.count),
-            React.createElement("h1", null,
-                "Rezultat: ",
-                this.state.result)));
+            React.createElement(ResultPanel, { count: this.state.count, result: this.state.result })));
     };
     return Counter;
 }(React.Component));
 var MathButton = function (props) {
     var numberValue = parseInt(props.number);
     return (React.createElement("button", { onClick: function () { return props.clickHandler(props.type, numberValue); } }, props.text));
+};
+var ResultPanel = function (props) {
+    return (React.createElement(React.Fragment, null,
+        React.createElement("h1", null,
+            "Ilosc klikniec: ",
+            props.count,
+            props.count > 10 ? React.createElement("span", null,
+                React.createElement("br", null),
+                " Licznik przekroczyl 10 ...") : null),
+        React.createElement("h1", null,
+            "Rezultat: ",
+            props.result)));
 };
 var initialResult = 8;
 ReactDOM.render(React.createElement(Counter, { initialResult: initialResult }), document.getElementById("root"));

@@ -97,8 +97,7 @@ class Counter extends React.Component<CounterProps> {
             <MathButton text="+1" type="addition" number="1" clickHandler={this.handleMathClick}></MathButton>
             <MathButton text="+10" type="addition" number="10" clickHandler={this.handleMathClick}></MathButton>
 
-            <h1>Ilosc klikniec: {this.state.count}</h1>
-            <h1>Rezultat: {this.state.result}</h1>
+            <ResultPanel count={this.state.count} result={this.state.result}></ResultPanel>
          </React.Fragment>
       );
    }
@@ -109,6 +108,17 @@ const MathButton = (props) => {
    let numberValue = parseInt(props.number)
    return (
       <button onClick={() => props.clickHandler(props.type, numberValue)}>{props.text}</button>
+   );
+};
+
+const ResultPanel = (props) => {
+   return (
+      <React.Fragment>
+         <h1>Ilosc klikniec: {props.count}
+            {props.count > 10 ? <span><br/> Licznik przekroczyl 10 ...</span> : null}
+         </h1>
+         <h1>Rezultat: {props.result}</h1>
+      </React.Fragment>
    );
 };
 
