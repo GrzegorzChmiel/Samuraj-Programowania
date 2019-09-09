@@ -95,9 +95,56 @@
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-ReactDOM.render([], document.getElementById("root"));
+var CheckboxAgeConfirmation = /** @class */ (function (_super) {
+    __extends(CheckboxAgeConfirmation, _super);
+    function CheckboxAgeConfirmation() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            ageCheckboxChecked: false
+        };
+        _this.handleAgeCheckboxChange = function () {
+            _this.setState(_this.changeState);
+        };
+        _this.displayMessage = function () {
+            if (_this.state.ageCheckboxChecked)
+                return React.createElement(PositiveMessage, null);
+            return React.createElement(NegativeMessage, null);
+        };
+        return _this;
+    }
+    CheckboxAgeConfirmation.prototype.changeState = function (prevState) {
+        return ({
+            ageCheckboxChecked: !prevState.ageCheckboxChecked
+        });
+    };
+    CheckboxAgeConfirmation.prototype.render = function () {
+        return (React.createElement(React.Fragment, null,
+            React.createElement("h1", null, "Kup bilet na horror roku"),
+            React.createElement("input", { type: "checkbox", id: "ageCheckbox", onChange: this.handleAgeCheckboxChange }),
+            React.createElement("label", { htmlFor: "ageCheckbox" }, "Mam co najmniej 16 lat"),
+            this.displayMessage()));
+    };
+    return CheckboxAgeConfirmation;
+}(React.Component));
+var PositiveMessage = function () { return React.createElement("p", null, "Mozesz obejrzec film. Zapraszamy!"); };
+var NegativeMessage = function () { return React.createElement("p", null, "Nie mozesz obejrzec tego filmu jesli masz mniej niz 16 lat!"); };
+ReactDOM.render(React.createElement(CheckboxAgeConfirmation, null), document.getElementById("root"));
 
 
 /***/ }),
