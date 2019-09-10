@@ -111,40 +111,55 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-var CheckboxAgeConfirmation = /** @class */ (function (_super) {
-    __extends(CheckboxAgeConfirmation, _super);
-    function CheckboxAgeConfirmation() {
+var TicketShop = /** @class */ (function (_super) {
+    __extends(TicketShop, _super);
+    function TicketShop() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            ageCheckboxChecked: false
+            ageCheckboxChecked: false,
+            requireValidation: true
         };
         _this.handleAgeCheckboxChange = function () {
             _this.setState(_this.changeState);
         };
+        _this.handleFormSubmit = function (e) {
+            e.preventDefault();
+            if (_this.state.requireValidation == true)
+                _this.setState({ requireValidation: false });
+        };
         _this.displayMessage = function () {
-            if (_this.state.ageCheckboxChecked)
-                return React.createElement(PositiveMessage, null);
-            return React.createElement(NegativeMessage, null);
+            if (_this.state.requireValidation == false) {
+                if (_this.state.ageCheckboxChecked)
+                    return React.createElement(PositiveMessage, null);
+                return React.createElement(NegativeMessage, null);
+            }
+            else {
+                return null;
+            }
         };
         return _this;
     }
-    CheckboxAgeConfirmation.prototype.changeState = function (prevState) {
+    TicketShop.prototype.changeState = function (prevState) {
         return ({
-            ageCheckboxChecked: !prevState.ageCheckboxChecked
+            ageCheckboxChecked: !prevState.ageCheckboxChecked,
+            requireValidation: true
         });
     };
-    CheckboxAgeConfirmation.prototype.render = function () {
+    TicketShop.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement("h1", null, "Kup bilet na horror roku"),
-            React.createElement("input", { type: "checkbox", id: "ageCheckbox", onChange: this.handleAgeCheckboxChange }),
-            React.createElement("label", { htmlFor: "ageCheckbox" }, "Mam co najmniej 16 lat"),
+            React.createElement("form", { onSubmit: this.handleFormSubmit },
+                React.createElement("input", { type: "checkbox", id: "ageCheckbox", onChange: this.handleAgeCheckboxChange }),
+                React.createElement("label", { htmlFor: "ageCheckbox" }, "Mam co najmniej 16 lat"),
+                React.createElement("br", null),
+                React.createElement("button", { type: "submit" }, "Kup bilet")),
             this.displayMessage()));
     };
-    return CheckboxAgeConfirmation;
+    return TicketShop;
 }(React.Component));
 var PositiveMessage = function () { return React.createElement("p", null, "Mozesz obejrzec film. Zapraszamy!"); };
 var NegativeMessage = function () { return React.createElement("p", null, "Nie mozesz obejrzec tego filmu jesli masz mniej niz 16 lat!"); };
-ReactDOM.render(React.createElement(CheckboxAgeConfirmation, null), document.getElementById("root"));
+ReactDOM.render(React.createElement(TicketShop, null), document.getElementById("root"));
 
 
 /***/ }),
