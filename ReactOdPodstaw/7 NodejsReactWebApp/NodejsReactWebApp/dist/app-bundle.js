@@ -95,78 +95,9 @@
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-var MessageContainer = function (props) {
-    var txt = props.txt;
-    return (React.createElement("p", null, txt));
-};
-var OrderForm = function (props) {
-    var submit = props.submit, ageCheckboxChange = props.ageCheckboxChange;
-    return (React.createElement("form", { onSubmit: submit },
-        React.createElement("input", { type: "checkbox", id: "ageCheckbox", onChange: ageCheckboxChange }),
-        React.createElement("label", { htmlFor: "ageCheckbox" }, "Mam co najmniej 16 lat"),
-        React.createElement("br", null),
-        React.createElement("button", { type: "submit" }, "Kup bilet")));
-};
-var displayMessage = function (requireValidation, ageCheckboxChecked) {
-    if (requireValidation == false) {
-        if (ageCheckboxChecked)
-            return React.createElement(MessageContainer, { txt: "Mozesz obejrzec film. Zapraszamy!" });
-        return React.createElement(MessageContainer, { txt: "Nie mozesz obejrzec tego filmu jesli masz mniej niz 16 lat!" });
-    }
-    else {
-        return null;
-    }
-};
-var TicketShop = /** @class */ (function (_super) {
-    __extends(TicketShop, _super);
-    function TicketShop() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            ageCheckboxChecked: false,
-            requireValidation: true
-        };
-        _this.handleAgeCheckboxChange = function () {
-            _this.setState(_this.changeStateOnCheckboxChange);
-        };
-        _this.handleFormSubmit = function (e) {
-            e.preventDefault();
-            if (_this.state.requireValidation == true)
-                _this.setState({ requireValidation: false });
-        };
-        return _this;
-    }
-    TicketShop.prototype.changeStateOnCheckboxChange = function (prevState) {
-        return ({
-            ageCheckboxChecked: !prevState.ageCheckboxChecked,
-            requireValidation: true
-        });
-    };
-    TicketShop.prototype.render = function () {
-        var _a = this.state, requireValidation = _a.requireValidation, ageCheckboxChecked = _a.ageCheckboxChecked;
-        return (React.createElement(React.Fragment, null,
-            React.createElement("h1", null, "Kup bilet na horror roku"),
-            React.createElement(OrderForm, { submit: this.handleFormSubmit, ageCheckboxChange: this.handleAgeCheckboxChange }),
-            displayMessage(requireValidation, ageCheckboxChecked)));
-    };
-    return TicketShop;
-}(React.Component));
-ReactDOM.render(React.createElement(TicketShop, null), document.getElementById("root"));
+ReactDOM.render([], document.getElementById("root"));
 
 
 /***/ }),
