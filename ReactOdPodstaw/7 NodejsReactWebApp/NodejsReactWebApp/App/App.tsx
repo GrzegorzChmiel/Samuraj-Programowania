@@ -1,6 +1,24 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+const MessageContainer = (props) => {
+	const { txt } = props
+	return (
+		<p>{txt}</p>
+	)
+}
+
+const displayMessage = (requireValidation, ageCheckboxChecked) => {
+	if (requireValidation == false) {
+		if (ageCheckboxChecked)
+			return <MessageContainer txt={"Mozesz obejrzec film. Zapraszamy!"} />
+		return <MessageContainer txt={"Nie mozesz obejrzec tego filmu jesli masz mniej niz 16 lat!"} />
+	}
+	else {
+		return null
+	}
+}
+
 class TicketShop extends React.Component {
 	state = {
 		ageCheckboxChecked: false,
@@ -14,18 +32,7 @@ class TicketShop extends React.Component {
 	handleFormSubmit = (e) => {
 		e.preventDefault()
 		if (this.state.requireValidation == true)
-			this.setState({requireValidation: false})
-	}
-
-	displayMessage = () => {
-		if (this.state.requireValidation == false) {
-			if (this.state.ageCheckboxChecked)
-				return <PositiveMessage />
-			return <NegativeMessage />
-		}
-		else {
-			return null
-		}
+			this.setState({ requireValidation: false })
 	}
 
 	changeStateOnCheckboxChange(prevState) {
@@ -36,6 +43,7 @@ class TicketShop extends React.Component {
 	}
 
 	render() {
+		const { requireValidation, ageCheckboxChecked } = this.state
 		return (
 			<React.Fragment>
 				<h1>Kup bilet na horror roku</h1>
@@ -45,13 +53,10 @@ class TicketShop extends React.Component {
 					<br />
 					<button type="submit">Kup bilet</button>
 				</form>
-				{this.displayMessage()}
+				{displayMessage(requireValidation, ageCheckboxChecked)}
 			</React.Fragment>
 		)
 	}
 }
-
-const PositiveMessage = () => <p>Mozesz obejrzec film. Zapraszamy!</p>
-const NegativeMessage = () => <p>Nie mozesz obejrzec tego filmu jesli masz mniej niz 16 lat!</p>
 
 ReactDOM.render(<TicketShop />, document.getElementById("root"));
