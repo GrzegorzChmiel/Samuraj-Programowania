@@ -115,6 +115,14 @@ var MessageContainer = function (props) {
     var txt = props.txt;
     return (React.createElement("p", null, txt));
 };
+var OrderForm = function (props) {
+    var submit = props.submit, ageCheckboxChange = props.ageCheckboxChange;
+    return (React.createElement("form", { onSubmit: submit },
+        React.createElement("input", { type: "checkbox", id: "ageCheckbox", onChange: ageCheckboxChange }),
+        React.createElement("label", { htmlFor: "ageCheckbox" }, "Mam co najmniej 16 lat"),
+        React.createElement("br", null),
+        React.createElement("button", { type: "submit" }, "Kup bilet")));
+};
 var displayMessage = function (requireValidation, ageCheckboxChecked) {
     if (requireValidation == false) {
         if (ageCheckboxChecked)
@@ -153,11 +161,7 @@ var TicketShop = /** @class */ (function (_super) {
         var _a = this.state, requireValidation = _a.requireValidation, ageCheckboxChecked = _a.ageCheckboxChecked;
         return (React.createElement(React.Fragment, null,
             React.createElement("h1", null, "Kup bilet na horror roku"),
-            React.createElement("form", { onSubmit: this.handleFormSubmit },
-                React.createElement("input", { type: "checkbox", id: "ageCheckbox", onChange: this.handleAgeCheckboxChange }),
-                React.createElement("label", { htmlFor: "ageCheckbox" }, "Mam co najmniej 16 lat"),
-                React.createElement("br", null),
-                React.createElement("button", { type: "submit" }, "Kup bilet")),
+            React.createElement(OrderForm, { submit: this.handleFormSubmit, ageCheckboxChange: this.handleAgeCheckboxChange }),
             displayMessage(requireValidation, ageCheckboxChecked)));
     };
     return TicketShop;
