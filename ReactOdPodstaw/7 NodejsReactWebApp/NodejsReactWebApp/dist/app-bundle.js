@@ -95,73 +95,9 @@
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-var App = /** @class */ (function (_super) {
-    __extends(App, _super);
-    function App() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            availableProducts: 15,
-            shoppingCart: 0
-        };
-        _this.caller = "";
-        _this.handleAdd = function () {
-            _this.caller = "Add";
-            _this.setState(_this.changeShoppingCard);
-        };
-        _this.handleRem = function () {
-            _this.caller = "Rem";
-            _this.setState(_this.changeShoppingCard);
-        };
-        _this.handleBuy = function () {
-            _this.setState(_this.changeOnBuy);
-        };
-        return _this;
-    }
-    App.prototype.changeOnBuy = function (prevState) {
-        return ({
-            availableProducts: prevState.availableProducts - prevState.shoppingCart,
-            shoppingCart: 0
-        });
-    };
-    App.prototype.changeShoppingCard = function (prevState) {
-        var quantity = this.caller == "Add" ? 1 : -1;
-        var returnObj = { shoppingCart: prevState.shoppingCart + quantity };
-        return returnObj;
-    };
-    App.prototype.render = function () {
-        var _a = this.state, shoppingCart = _a.shoppingCart, availableProducts = _a.availableProducts;
-        var addDisabled = shoppingCart == availableProducts;
-        var remDisabled = shoppingCart == 0;
-        var showBuyButton = shoppingCart > 0;
-        var shoppingQuantityStyleObject = shoppingCart == 0 ? { opacity: 0.3 } : {};
-        return (React.createElement(React.Fragment, null,
-            React.createElement("button", { id: "Add", onClick: this.handleAdd, disabled: addDisabled }, "+"),
-            React.createElement("span", { style: shoppingQuantityStyleObject },
-                " ",
-                shoppingCart,
-                " "),
-            React.createElement("button", { id: "Rem", onClick: this.handleRem, disabled: remDisabled }, "-"),
-            showBuyButton && React.createElement("button", { onClick: this.handleBuy }, "Kup")));
-    };
-    return App;
-}(React.Component));
-ReactDOM.render(React.createElement(App, null), document.getElementById("root"));
+ReactDOM.render([], document.getElementById("root"));
 
 
 /***/ }),
