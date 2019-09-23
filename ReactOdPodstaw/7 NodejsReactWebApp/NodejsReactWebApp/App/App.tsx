@@ -36,36 +36,23 @@ class App extends React.Component {
 		return returnObj
 	}
 
-/*
 	render() {
-		const addDisabled = this.state.shoppingCart == this.state.availableProducts
-		const remDisabled = this.state.shoppingCart == 0
-		const showBuyButton = this.state.shoppingCart > 0
-		const shoppingQuantityStyleObject = this.state.shoppingCart == 0 ? { opacity: 0.3} : {}
-		return (
-			<React.Fragment>
-				<button id="Add" onClick={this.handleAdd} disabled={addDisabled}>+</button>
-				<span style={shoppingQuantityStyleObject}> {this.state.shoppingCart} </span>
-				<button id="Rem" onClick={this.handleRem} disabled={remDisabled}>-</button>
-				{showBuyButton && <button onClick={this.handleBuy}>Kup</button>}
-			</React.Fragment>
-		)
-	}
-*/
+		const { shoppingCart, availableProducts } = this.state
 
-	render() {
-		const addDisabled = this.state.shoppingCart == this.state.availableProducts
-		const remDisabled = this.state.shoppingCart == 0
-		const showBuyButton = this.state.shoppingCart > 0
+		const addDisabled = shoppingCart == availableProducts
+		const remDisabled = shoppingCart == 0
+		const showBuyButton = shoppingCart > 0
+		const shoppingQuantityStyleObject = shoppingCart == 0 ? { opacity: 0.3} : {}
 		return (
 			<React.Fragment>
 				<button id="Add" onClick={this.handleAdd} disabled={addDisabled}>+</button>
-				<span style={this.state.shoppingCart == 0 ? { opacity: 0.3 } : {}}> {this.state.shoppingCart} </span>
+				<span style={shoppingQuantityStyleObject}> {shoppingCart} </span>
 				<button id="Rem" onClick={this.handleRem} disabled={remDisabled}>-</button>
 				{showBuyButton && <button onClick={this.handleBuy}>Kup</button>}
 			</React.Fragment>
 		)
 	}
+
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

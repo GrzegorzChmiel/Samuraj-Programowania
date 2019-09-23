@@ -144,31 +144,17 @@ var App = /** @class */ (function (_super) {
         var returnObj = { shoppingCart: prevState.shoppingCart + quantity };
         return returnObj;
     };
-    /*
-        render() {
-            const addDisabled = this.state.shoppingCart == this.state.availableProducts
-            const remDisabled = this.state.shoppingCart == 0
-            const showBuyButton = this.state.shoppingCart > 0
-            const shoppingQuantityStyleObject = this.state.shoppingCart == 0 ? { opacity: 0.3} : {}
-            return (
-                <React.Fragment>
-                    <button id="Add" onClick={this.handleAdd} disabled={addDisabled}>+</button>
-                    <span style={shoppingQuantityStyleObject}> {this.state.shoppingCart} </span>
-                    <button id="Rem" onClick={this.handleRem} disabled={remDisabled}>-</button>
-                    {showBuyButton && <button onClick={this.handleBuy}>Kup</button>}
-                </React.Fragment>
-            )
-        }
-    */
     App.prototype.render = function () {
-        var addDisabled = this.state.shoppingCart == this.state.availableProducts;
-        var remDisabled = this.state.shoppingCart == 0;
-        var showBuyButton = this.state.shoppingCart > 0;
+        var _a = this.state, shoppingCart = _a.shoppingCart, availableProducts = _a.availableProducts;
+        var addDisabled = shoppingCart == availableProducts;
+        var remDisabled = shoppingCart == 0;
+        var showBuyButton = shoppingCart > 0;
+        var shoppingQuantityStyleObject = shoppingCart == 0 ? { opacity: 0.3 } : {};
         return (React.createElement(React.Fragment, null,
             React.createElement("button", { id: "Add", onClick: this.handleAdd, disabled: addDisabled }, "+"),
-            React.createElement("span", { style: this.state.shoppingCart == 0 ? { opacity: 0.3 } : {} },
+            React.createElement("span", { style: shoppingQuantityStyleObject },
                 " ",
-                this.state.shoppingCart,
+                shoppingCart,
                 " "),
             React.createElement("button", { id: "Rem", onClick: this.handleRem, disabled: remDisabled }, "-"),
             showBuyButton && React.createElement("button", { onClick: this.handleBuy }, "Kup")));
