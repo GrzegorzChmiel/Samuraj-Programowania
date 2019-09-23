@@ -144,13 +144,29 @@ var App = /** @class */ (function (_super) {
         var returnObj = { shoppingCart: prevState.shoppingCart + quantity };
         return returnObj;
     };
+    /*
+        render() {
+            const addDisabled = this.state.shoppingCart == this.state.availableProducts
+            const remDisabled = this.state.shoppingCart == 0
+            const showBuyButton = this.state.shoppingCart > 0
+            const shoppingQuantityStyleObject = this.state.shoppingCart == 0 ? { opacity: 0.3} : {}
+            return (
+                <React.Fragment>
+                    <button id="Add" onClick={this.handleAdd} disabled={addDisabled}>+</button>
+                    <span style={shoppingQuantityStyleObject}> {this.state.shoppingCart} </span>
+                    <button id="Rem" onClick={this.handleRem} disabled={remDisabled}>-</button>
+                    {showBuyButton && <button onClick={this.handleBuy}>Kup</button>}
+                </React.Fragment>
+            )
+        }
+    */
     App.prototype.render = function () {
         var addDisabled = this.state.shoppingCart == this.state.availableProducts;
         var remDisabled = this.state.shoppingCart == 0;
         var showBuyButton = this.state.shoppingCart > 0;
         return (React.createElement(React.Fragment, null,
             React.createElement("button", { id: "Add", onClick: this.handleAdd, disabled: addDisabled }, "+"),
-            React.createElement("span", null,
+            React.createElement("span", { style: this.state.shoppingCart == 0 ? { opacity: 0.3 } : {} },
                 " ",
                 this.state.shoppingCart,
                 " "),
