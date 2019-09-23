@@ -128,8 +128,17 @@ var App = /** @class */ (function (_super) {
             _this.caller = "Rem";
             _this.setState(_this.changeShoppingCard);
         };
+        _this.handleBuy = function () {
+            _this.setState(_this.changeOnBuy);
+        };
         return _this;
     }
+    App.prototype.changeOnBuy = function (prevState) {
+        return ({
+            availableProducts: prevState.availableProducts - prevState.shoppingCart,
+            shoppingCart: 0
+        });
+    };
     App.prototype.changeShoppingCard = function (prevState) {
         var quantity = this.caller == "Add" ? 1 : -1;
         var returnObj = { shoppingCart: prevState.shoppingCart + quantity };
@@ -138,13 +147,15 @@ var App = /** @class */ (function (_super) {
     App.prototype.render = function () {
         var addDisabled = this.state.shoppingCart == this.state.availableProducts;
         var remDisabled = this.state.shoppingCart == 0;
+        var showBuyButton = this.state.shoppingCart > 0;
         return (React.createElement(React.Fragment, null,
             React.createElement("button", { id: "Add", onClick: this.handleAdd, disabled: addDisabled }, "+"),
             React.createElement("span", null,
                 " ",
                 this.state.shoppingCart,
                 " "),
-            React.createElement("button", { id: "Rem", onClick: this.handleRem, disabled: remDisabled }, "-")));
+            React.createElement("button", { id: "Rem", onClick: this.handleRem, disabled: remDisabled }, "-"),
+            showBuyButton && React.createElement("button", { onClick: this.handleBuy }, "Kup")));
     };
     return App;
 }(React.Component));
