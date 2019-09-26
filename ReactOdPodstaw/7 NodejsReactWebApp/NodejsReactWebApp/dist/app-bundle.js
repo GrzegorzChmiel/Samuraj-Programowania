@@ -95,9 +95,55 @@
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-ReactDOM.render([], document.getElementById("root"));
+var ListItems = /** @class */ (function (_super) {
+    __extends(ListItems, _super);
+    function ListItems() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            items: ["jablko", "sliwka", "gruszka"]
+        };
+        return _this;
+        /*
+            render() {
+                const newTab = this.state.items.map((item, index, items) => {
+                    return <li key={index}> {`Owoc ${item} o indeksie w tablicy ${index}`}</li>
+                })
+                return (
+                    <>
+                        <ul>
+                            {newTab}
+                        </ul>
+                    </>
+                )
+            }
+        */
+    }
+    ListItems.prototype.render = function () {
+        return (React.createElement(React.Fragment, null,
+            React.createElement("ul", null, this.state.items.map(function (item, index, items) {
+                return React.createElement("li", { key: index },
+                    " ", "Owoc " + item + " o indeksie w tablicy " + index);
+            }))));
+    };
+    return ListItems;
+}(React.Component));
+ReactDOM.render(React.createElement(ListItems, null), document.getElementById("root"));
 
 
 /***/ }),
