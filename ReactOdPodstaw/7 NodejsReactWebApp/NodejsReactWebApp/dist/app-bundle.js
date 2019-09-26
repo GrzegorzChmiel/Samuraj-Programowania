@@ -119,30 +119,20 @@ var ListItems = /** @class */ (function (_super) {
             items: ["jablko", "sliwka", "gruszka"]
         };
         return _this;
-        /*
-            render() {
-                const newTab = this.state.items.map((item, index, items) => {
-                    return <li key={index}> {`Owoc ${item} o indeksie w tablicy ${index}`}</li>
-                })
-                return (
-                    <>
-                        <ul>
-                            {newTab}
-                        </ul>
-                    </>
-                )
-            }
-        */
     }
     ListItems.prototype.render = function () {
+        var listItemTab = this.state.items.map(function (item, index) {
+            return React.createElement(ListItem, { key: item, content: item, contentIndex: index });
+        });
         return (React.createElement(React.Fragment, null,
-            React.createElement("ul", null, this.state.items.map(function (item, index, items) {
-                return React.createElement("li", { key: index },
-                    " ", "Owoc " + item + " o indeksie w tablicy " + index);
-            }))));
+            React.createElement("ul", null, listItemTab)));
     };
     return ListItems;
 }(React.Component));
+var ListItem = function (props) {
+    return React.createElement("li", null,
+        " ", "Owoc " + props.content + " o indeksie w tablicy " + props.contentIndex);
+};
 ReactDOM.render(React.createElement(ListItems, null), document.getElementById("root"));
 
 

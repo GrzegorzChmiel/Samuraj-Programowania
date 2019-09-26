@@ -7,30 +7,21 @@ class ListItems extends React.Component {
 	}
 
 	render() {
+		const listItemTab = this.state.items.map((item, index) => {
+			return <ListItem key={item} content={item} contentIndex={index} />
+		})
 		return (
 			<>
 				<ul>
-					{this.state.items.map((item, index, items) => {
-						return <li key={index}> {`Owoc ${item} o indeksie w tablicy ${index}`}</li>
-					})}
+					{listItemTab}
 				</ul>
 			</>
 		)
 	}
-	/*
-		render() {
-			const newTab = this.state.items.map((item, index, items) => {
-				return <li key={index}> {`Owoc ${item} o indeksie w tablicy ${index}`}</li>
-			})
-			return (
-				<>
-					<ul>
-						{newTab}
-					</ul>
-				</>
-			)
-		}
-	*/
+}
+
+const ListItem = (props) => {
+	return <li> {`Owoc ${props.content} o indeksie w tablicy ${props.contentIndex}`}</li>
 }
 
 ReactDOM.render(<ListItems />, document.getElementById("root"));
