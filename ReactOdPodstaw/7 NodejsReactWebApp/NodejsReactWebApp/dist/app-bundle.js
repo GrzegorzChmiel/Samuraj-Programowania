@@ -117,21 +117,25 @@ var data = {
             id: 1,
             age: 29,
             name: "Arek",
+            sex: "mezczyzna"
         },
         {
             id: 2,
             age: 49,
             name: "Marta",
+            sex: "kobieta"
         },
         {
             id: 3,
             age: 19,
             name: "Stasia",
+            sex: "kobieta"
         },
         {
             id: 4,
             age: 24,
             name: "Karol",
+            sex: "mezczyzna"
         }
     ]
 };
@@ -141,22 +145,31 @@ var ListItems = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     ListItems.prototype.render = function () {
-        var listItemTab = this.props.data.users.map(function (user) {
+        var items = this.props.data.users.filter(function (user) { return user.sex == "kobieta"; });
+        var listItemTabFemale = items.map(function (user) {
             return React.createElement(ListItem, { key: user.id, user: user });
         });
-        return (React.createElement(React.Fragment, null, listItemTab));
+        items = this.props.data.users.filter(function (user) { return user.sex == "mezczyzna"; });
+        var listItemTabMale = items.map(function (user) {
+            return React.createElement(ListItem, { key: user.id, user: user });
+        });
+        return (React.createElement(React.Fragment, null,
+            listItemTabFemale,
+            listItemTabMale));
     };
     return ListItems;
 }(React.Component));
 var ListItem = function (_a) {
     var user = _a.user;
     return (React.createElement("div", null,
-        React.createElement("h2", null,
-            " Uzytkownik o nazwie: ",
-            user.name),
-        React.createElement("h3", null,
-            "Wiek Uzytkownika: ",
-            user.age)));
+        React.createElement("h3", null, user.name),
+        React.createElement("p", null, "Informacje o uzytkowniku:"),
+        React.createElement("p", null,
+            "Wiek: ",
+            user.age),
+        React.createElement("p", null,
+            "Plec: ",
+            user.sex)));
 };
 ReactDOM.render(React.createElement(ListItems, { data: data }), document.getElementById("root"));
 
