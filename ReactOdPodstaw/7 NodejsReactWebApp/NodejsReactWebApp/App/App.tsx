@@ -1,27 +1,57 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-class ListItems extends React.Component {
-	state = {
-		items: ["jablko", "sliwka", "gruszka"]
-	}
+const data = {
+	users: [
+		{
+			id: 1,
+			age: 29,
+			name: "Arek",
+		},
+		{
+			id: 2,
+			age: 49,
+			name: "Marta",
+		},
+		{
+			id: 3,
+			age: 19,
+			name: "Stasia",
+		},
+		{
+			id: 4,
+			age: 24,
+			name: "Karol",
+		}
+	]
+}
 
+interface IListItemsProps {
+	data: any
+}
+
+class ListItems extends React.Component<IListItemsProps> {
 	render() {
-		const listItemTab = this.state.items.map((item, index) => {
-			return <ListItem key={item} content={item} contentIndex={index} />
+
+		const listItemTab = this.props.data.users.map((user) => {
+			return <ListItem key={user.id} user={user} />
 		})
+
 		return (
 			<>
-				<ul>
-					{listItemTab}
-				</ul>
+				{listItemTab}
 			</>
 		)
 	}
 }
 
-const ListItem = (props) => {
-	return <li> {`Owoc ${props.content} o indeksie w tablicy ${props.contentIndex}`}</li>
+const ListItem = ({ user }) => {
+	return (
+		<div>
+			<h2> Uzytkownik o nazwie: {user.name}</h2>
+			<h3>Wiek Uzytkownika: {user.age}</h3>
+		</div>
+	)
 }
 
-ReactDOM.render(<ListItems />, document.getElementById("root"));
+ReactDOM.render(<ListItems data={data} />, document.getElementById("root"));

@@ -111,29 +111,54 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+var data = {
+    users: [
+        {
+            id: 1,
+            age: 29,
+            name: "Arek",
+        },
+        {
+            id: 2,
+            age: 49,
+            name: "Marta",
+        },
+        {
+            id: 3,
+            age: 19,
+            name: "Stasia",
+        },
+        {
+            id: 4,
+            age: 24,
+            name: "Karol",
+        }
+    ]
+};
 var ListItems = /** @class */ (function (_super) {
     __extends(ListItems, _super);
     function ListItems() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            items: ["jablko", "sliwka", "gruszka"]
-        };
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ListItems.prototype.render = function () {
-        var listItemTab = this.state.items.map(function (item, index) {
-            return React.createElement(ListItem, { key: item, content: item, contentIndex: index });
+        var listItemTab = this.props.data.users.map(function (user) {
+            return React.createElement(ListItem, { key: user.id, user: user });
         });
-        return (React.createElement(React.Fragment, null,
-            React.createElement("ul", null, listItemTab)));
+        return (React.createElement(React.Fragment, null, listItemTab));
     };
     return ListItems;
 }(React.Component));
-var ListItem = function (props) {
-    return React.createElement("li", null,
-        " ", "Owoc " + props.content + " o indeksie w tablicy " + props.contentIndex);
+var ListItem = function (_a) {
+    var user = _a.user;
+    return (React.createElement("div", null,
+        React.createElement("h2", null,
+            " Uzytkownik o nazwie: ",
+            user.name),
+        React.createElement("h3", null,
+            "Wiek Uzytkownika: ",
+            user.age)));
 };
-ReactDOM.render(React.createElement(ListItems, null), document.getElementById("root"));
+ReactDOM.render(React.createElement(ListItems, { data: data }), document.getElementById("root"));
 
 
 /***/ }),
