@@ -142,20 +142,50 @@ var data = {
 var ListItems = /** @class */ (function (_super) {
     __extends(ListItems, _super);
     function ListItems() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            selection: "All"
+        };
+        /*
+        handleSelectionClick(selectionMode) {
+    
+        }
+        */
+        _this.handleSelectionClick = function (selectionMode) {
+            var modObject = { selection: "All" };
+            switch (selectionMode) {
+                case "Female":
+                    modObject.selection = "Female";
+                    break;
+                case "Male":
+                    modObject.selection = "Male";
+                    break;
+            }
+            _this.setState(modObject);
+        };
+        return _this;
     }
+    ListItems.prototype.getItemsForList = function () {
+        var filter = (this.state.selection == "Female" ? "kobieta" :
+            (this.state.selection == "Male" ? "mezczyzna" : "wszyscy"));
+        if (filter == "wszyscy")
+            return this.props.data.users;
+        return this.props.data.users.filter(function (item) { return item.sex == filter; });
+    };
+    ListItems.prototype.renderItemsList = function (items) {
+        var returnList = items.map(function (item) {
+            return React.createElement(ListItem, { key: item.id, user: item });
+        });
+        return returnList;
+    };
     ListItems.prototype.render = function () {
-        var items = this.props.data.users.filter(function (user) { return user.sex == "kobieta"; });
-        var listItemTabFemale = items.map(function (user) {
-            return React.createElement(ListItem, { key: user.id, user: user });
-        });
-        items = this.props.data.users.filter(function (user) { return user.sex == "mezczyzna"; });
-        var listItemTabMale = items.map(function (user) {
-            return React.createElement(ListItem, { key: user.id, user: user });
-        });
+        var _this = this;
+        var items = this.getItemsForList();
         return (React.createElement(React.Fragment, null,
-            listItemTabFemale,
-            listItemTabMale));
+            React.createElement("button", { onClick: function () { _this.handleSelectionClick("All"); } }, "Wszyscy"),
+            React.createElement("button", { onClick: function () { _this.handleSelectionClick("Female"); } }, "Kobiety"),
+            React.createElement("button", { onClick: function () { _this.handleSelectionClick("Male"); } }, "Mezczyzni"),
+            this.renderItemsList(items)));
     };
     return ListItems;
 }(React.Component));

@@ -35,22 +35,59 @@ interface IListItemsProps {
 }
 
 class ListItems extends React.Component<IListItemsProps> {
+	state = {
+		selection: "All"
+	}
+
+	/*
+	handleSelectionClick(selectionMode) {
+
+	}
+	*/
+	handleSelectionClick = (selectionMode) => {
+		let modObject = { selection: "All" }
+		switch (selectionMode) {
+			case "Female":
+				modObject.selection = "Female"
+				break
+			case "Male":
+				modObject.selection = "Male"
+				break
+		}
+		this.setState(modObject)
+	}
+
+	getItemsForList() {
+		const filter = (this.state.selection == "Female" ? "kobieta" :
+			(this.state.selection == "Male" ? "mezczyzna" : "wszyscy"))
+		if (filter == "wszyscy")
+			return this.props.data.users;
+		return this.props.data.users.filter((item) => { return item.sex == filter })
+	}
+
+	renderItemsList(items) {
+		const returnList = items.map((item) => {
+			return <ListItem key={item.id} user={item}></ListItem>
+		});
+		return returnList
+	}
+
 	render() {
-
-		let items = this.props.data.users.filter((user) => { return user.sex == "kobieta" })
-		const listItemTabFemale = items.map((user) => {
-			return <ListItem key={user.id} user={user} />
-		})
-
-		items = this.props.data.users.filter((user) => { return user.sex == "mezczyzna" })
-		const listItemTabMale = items.map((user) => {
-			return <ListItem key={user.id} user={user} />
-		})
-
+		const items = this.getItemsForList()
 		return (
 			<>
-				{listItemTabFemale}
-				{listItemTabMale}
+				{/*
+				<button onClick={() => { this.handleSelectionClick("All") }}>Wszyscy</button>
+				<button onClick={() => { this.handleSelectionClick("Female") }}>Kobiety</button>
+				<button onClick={() => { this.handleSelectionClick("Male") }}>Mezczyzni</button>
+				*/}
+
+				<button onClick={() => { this.handleSelectionClick("All") }}>Wszyscy</button>
+				<button onClick={() => { this.handleSelectionClick("Female") }}>Kobiety</button>
+				<button onClick={() => { this.handleSelectionClick("Male") }}>Mezczyzni</button>
+
+
+				{this.renderItemsList(items)}
 			</>
 		)
 	}
