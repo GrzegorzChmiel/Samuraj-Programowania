@@ -1,12 +1,16 @@
 const ListItems = props => {
+  const listItemsTab = createListItems(props.items);
   return (
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-    </ul>
+    <div className="list">
+      <h3>Twoje zamówienie:</h3>
+      <ul>{listItemsTab}</ul>
+    </div>
   );
+};
+
+const createListItems = itemsTab => {
+  const listItemsTab = itemsTab.map(element => {
+    return <Item key={element.id} name={element.name} price={element.price} />;
+  });
+  return listItemsTab;
 };
