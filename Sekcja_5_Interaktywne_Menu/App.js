@@ -10,11 +10,25 @@ class App extends React.Component {
     ]
   };
 
+  handleActiveChange = id => {
+    const changedItems = this.state.items.map(element => {
+      if (element.id == id) {
+        element.active = !element.active;
+      }
+      return element;
+    });
+
+    this.setState({ items: changedItems });
+  };
+
   render() {
     return (
       <React.Fragment>
         <Header items={this.state.items} />
-        <ListItems items={this.state.items} />
+        <ListItems
+          items={this.state.items}
+          activeChange={this.handleActiveChange}
+        />
       </React.Fragment>
     );
   }
