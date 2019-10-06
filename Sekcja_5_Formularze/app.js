@@ -6,24 +6,18 @@ class Form extends React.Component {
     cityVisitCount: "1"
   };
 
-  handleCityChange = event => {
-    const city = event.target.value;
-    this.setState({ city });
-  };
-
-  handleCityDescChange = event => {
-    const cityDesc = event.target.value;
-    this.setState({ cityDesc });
-  };
-
-  handleCityPrefChange = event => {
-    const cityPref = event.target.checked;
-    this.setState({ cityPref });
-  };
-
-  handleCityVisitCountChange = event => {
-    const cityVisitCount = event.target.value;
-    this.setState({ cityVisitCount });
+  handleChange = event => {
+    let changeObject = {};
+    if (event.target.type == "checkbox") {
+      changeObject = {
+        [event.target.name]: event.target.checked
+      };
+    } else {
+      changeObject = {
+        [event.target.name]: event.target.value
+      };
+    }
+    this.setState(changeObject);
   };
 
   render() {
@@ -33,6 +27,7 @@ class Form extends React.Component {
           <label htmlFor="city">Podaj nazwę miasta: </label>
           <input
             id="city"
+            name="city"
             type="text"
             value={this.state.city}
             onChange={this.handleCityChange}
@@ -43,6 +38,7 @@ class Form extends React.Component {
           <label htmlFor="cityDesc">Podaj opis miasta: </label>
           <textarea
             id="cityDesc"
+            name="cityDesc"
             rows="5"
             value={this.state.cityDesc}
             onChange={this.handleCityDescChange}
@@ -54,6 +50,7 @@ class Form extends React.Component {
           <input
             type="checkbox"
             id="cityPref"
+            name="cityPref"
             checked={this.state.cityPref}
             onChange={this.handleCityPrefChange}
           ></input>
@@ -63,6 +60,7 @@ class Form extends React.Component {
           <label htmlFor="cityVisitCount">Ilość wizyt w mieście: </label>
           <select
             id="cityVisitCount"
+            name="cityVisitCount"
             value={this.state.cityVisitCount}
             onChange={this.handleCityVisitCountChange}
           >
