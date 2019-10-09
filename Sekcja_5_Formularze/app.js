@@ -8,21 +8,31 @@ const ResultViewer = props => {
       <span>
         {`${labelText}`} <strong>{`${displayValue}`}</strong>
       </span>
+      <br />
     </>
   );
 };
 
 class ExchangeCounter extends React.Component {
-  get euroRatio() {
-    return 4.2;
-  }
-
-  get dollarRatio() {
-    return 3.5;
-  }
+  currencies = [
+    { id: 1, name: "pound", ratio: 4.8, title: "Wartość w funtach:" },
+    { id: 2, name: "dollar", ratio: 3.5, title: "Wartość w dolarach:" },
+    { id: 3, name: "euro", ratio: 4.2, title: "Wartość w euro:" }
+  ];
 
   state = {
     currentValue: 0
+  };
+
+  createViewer = currency => {
+    return (
+      <ResultViewer
+        key={currency.id}
+        labelText={currency.title}
+        ratio={currency.ratio}
+        value={this.state.currentValue}
+      ></ResultViewer>
+    );
   };
 
   handleInputValueChange(event) {
@@ -32,6 +42,9 @@ class ExchangeCounter extends React.Component {
   }
 
   render() {
+    const resultViewers = this.currencies.map(currency =>
+      this.createViewer(currency)
+    );
     return (
       <>
         <div>
@@ -44,20 +57,7 @@ class ExchangeCounter extends React.Component {
             }}
           />
         </div>
-        <div>
-          <ResultViewer
-            labelText="Wartość w $:"
-            ratio={this.dollarRatio}
-            value={this.state.currentValue}
-          ></ResultViewer>
-        </div>
-        <div>
-          <ResultViewer
-            labelText="Wartość w EUR:"
-            ratio={this.euroRatio}
-            value={this.state.currentValue}
-          ></ResultViewer>
-        </div>
+        <div>{resultViewers}</div>
       </>
     );
   }
