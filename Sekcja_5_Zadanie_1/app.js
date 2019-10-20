@@ -1,8 +1,15 @@
 class ShowAugur extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleNewAugurChangePrv = this.handleNewAugurChange.bind(this);
+  }
+
   augurs = ["Wróżba 1", "Wróżba 2", "Wróżba 3"];
 
   state = {
-    currentIndex: 0
+    currentIndex: 0,
+    newAugur: ""
   };
 
   handleShowButtonClick() {
@@ -22,6 +29,36 @@ class ShowAugur extends React.Component {
     return result;
   }
 
+  handleFormSubmit(evt) {
+    evt.preventDefault();
+    this.addNewAugur();
+    this.showAllAugurs();
+  }
+
+  showAllAugurs() {
+    var message = this.augurs.join("\n");
+    alert(message);
+  }
+
+  handleNewAugurChange(evt) {
+    this.setState({
+      newAugur: evt.target.value
+    });
+  }
+
+  addNewAugur() {
+    if (
+      this.state.newAugur != "" &&
+      this.augurs.findIndex(a => a == this.state.newAugur) == -1
+    ) {
+      this.augurs = this.augurs.concat(this.state.newAugur);
+    }
+
+    this.setState({
+      newAugur: ""
+    });
+  }
+
   render() {
     return (
       <>
@@ -29,8 +66,22 @@ class ShowAugur extends React.Component {
           Pokaż wróżbę
         </button>
         <br />
-        <h3>Wybrana wróżba:</h3>
-        <h3>{this.augurs[this.state.currentIndex]}</h3>
+        <h4>Wybrana wróżba:</h4>
+        <h4>{this.augurs[this.state.currentIndex]}</h4>
+        <hr />
+        <h3>Dodawanie wróżby</h3>
+        <form onSubmit={this.handleFormSubmit.bind(this)}>
+          <div>
+            <label htmlFor="newAugur">Nazwa nowej wróżby: </label>
+            <input
+              type="text"
+              id="newAugur"
+              value={this.state.newAugur}
+              onChange={this.handleNewAugurChangePrv}
+            />
+          </div>
+          <input type="submit" value="Dodaj wróżbę"></input>
+        </form>
       </>
     );
   }
