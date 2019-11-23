@@ -2,30 +2,12 @@ import React from "react";
 import Word from "./Word";
 import "./App.css";
 
-const tmpData = [
-  {
-    id: 1,
-    en: "cat",
-    pl: "kot"
-  },
-  {
-    id: 2,
-    en: "dog",
-    pl: "pies"
-  },
-  {
-    id: 3,
-    en: "fish",
-    pl: "ryba"
-  }
-];
-
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: tmpData,
+      data: [],
       dataLoaded: false
     };
   }
@@ -35,8 +17,22 @@ class App extends React.Component {
   };
 
   getExternalData = () => {
-    fetch;
+    fetch("Data/Words.json")
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        const newState = {
+          data: json.words,
+          dataLoaded: true
+        };
+        this.setState(newState);
+      });
   };
+
+  componentDidMount() {
+    this.getExternalData();
+  }
 
   render() {
     const words = this.state.data.map(this.createWord);
