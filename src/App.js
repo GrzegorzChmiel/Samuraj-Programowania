@@ -7,21 +7,37 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const xhr = new XMLHttpRequest();
-    xhr.open("get", "https://jsonplaceholder.typicode.com/users");
-    xhr.send();
-    xhr.onload = () => this.usersLoad(xhr);
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(
+        response => {
+          return this.checkResponseStatus(response);
+        },
+        reason => {
+          console.log(reason);
+        }
+      )
+      .then(response => this.getJSON(response))
+      .then(response => this.updateState(response));
   }
 
-  usersLoad(xhr) {
+  checkResponseStatus(response) {
+    if (response.status === 200) return response;
+
+    return null;
+  }
+
+  getJSON(response) {
+    if (response != null) return response.json();
+
+    return null;
+  }
+
+  updateState(json) {
     let users = [];
-    if (xhr.status === 200) {
-      const response = xhr.response;
-      const responseJSON = JSON.parse(response);
-      users = responseJSON;
-    } else {
-      users = [];
+    if (json != null) {
+      users = json;
     }
+
     this.setState({ users });
   }
 
