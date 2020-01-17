@@ -3,7 +3,7 @@ import InputForm from "./InputForm";
 import ResultForm from "./ResultForm";
 import "./App.css";
 
-//https://www.youtube.com/watch?v=fMB7aNN5ot4&list=PLTs20Q-BTEMNlWqt1sofJj5HDDqNlZy3L&index=4
+//https://www.youtube.com/watch?v=fMB7aNN5ot4&list=PLTs20Q-BTEMNlWqt1sofJj5HDDqNlZy3L&index=5
 
 class App extends React.Component {
   state = {
@@ -16,18 +16,22 @@ class App extends React.Component {
     actualPreassuse: "",
     rainfall: "",
     humidity: "",
-    error: false
+    error: false,
+    formSubmitted: false
   };
 
   handleCityChange = event => {
-    const newState = { cityName: event.target.value };
-    this.setState(newState);
+    const newState = {
+      cityName: event.target.value,
+      formSubmitted: false
+    };
+    this.setState(actualState => newState);
   };
 
   handleInputFormSubmit = event => {
     event.preventDefault();
 
-    const URL = `https://danepubliczne.imgw.pl/api/data/synop/station/${"ostroleka"}`;
+    const URL = `https://danepubliczne.imgw.pl/api/data/synop/station/${this.state.cityName}`;
 
     fetch(URL)
       .then(response => {
@@ -39,32 +43,29 @@ class App extends React.Component {
       })
       .then(jsonData => {
         console.log(jsonData);
+        this.setState(actualState => {
+          return {
+            error: false,
+            formSubmitted: true
+          };
+        });
       })
       .catch(error => {
         console.log(error);
+        this.setState(actualState => {
+          return {
+            error: true,
+            formSubmitted: true
+          };
+        });
       });
   };
 
-  getDisplayData() {
-    const data = {
-      cityName: this.state.error ? "" : this.state.cityName,
-      dateAndTime: this.state.error ? "" : this.state.dateAndTime,
-      sunrise: this.state.error ? "" : this.state.sunrise,
-      sunset: this.state.error ? "" : this.state.sunset,
-      actualTemperature: this.state.error ? "" : this.state.actualTemperature,
-      actualWindSpeed: this.state.error ? "" : this.state.actualWindSpeed,
-      actualPreassuse: this.state.error ? "" : this.state.actualPreassuse,
-      errorMessage: this.state.error ? "Wystąpił problem - spróbuj ponownie później." : ""
-    };
-    return data;
-  }
-
   render() {
-    const displayData = this.getDisplayData();
     return (
       <div className="App">
-        <InputForm displayData={this.state.cityName} cityChangeHandler={this.handleCityChange} submitHandler={this.handleInputFormSubmit} />
-        <ResultForm />
+        <InputForm cityChangeHandler={this.handleCityChange} submitHandler={this.handleInputFormSubmit} />
+        <ResultForm displayData={this.state} />
       </div>
     );
   }
