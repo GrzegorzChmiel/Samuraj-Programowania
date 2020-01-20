@@ -1,22 +1,18 @@
-.App {
-  text-align: center;
+.App input,
+.App button {
+  margin: 20px;
+  padding: 10px 20px;
+  border: 2px solid gray;
+  background-color: white;
+  transition: 0.3s;
 }
 
-.App-logo {
-  height: 40vmin;
+.App button {
+  cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.App button:hover {
+  background-color: black;
   color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+  border-color: black;
 }

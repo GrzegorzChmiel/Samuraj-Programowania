@@ -1,4 +1,5 @@
 import React from "react";
+import "./ResultForm.css";
 
 function displayWeatherInfo(displayData) {
   const { cityName, stationId, stationName, dateAndTime, actualTemperature, actualWindSpeed, windDirection, actualPreassuse, rainfall, humidity, formSubmitted } = displayData;
@@ -7,7 +8,9 @@ function displayWeatherInfo(displayData) {
   if (formSubmitted && cityName !== "") {
     markup = (
       <div>
-        <h3>Oto dane pogodowe dla miasta: {stationName}</h3>
+        <h3>
+          Oto dane pogodowe dla miasta: <em>{stationName}</em>
+        </h3>
         <h4>Id stacji: {stationId}</h4>
         <h4>Data i godzina pomiaru: {dateAndTime}</h4>
         <h4>Aktualna temperatura: {actualTemperature} &#176;C</h4>
@@ -30,7 +33,7 @@ function displayErrorInfo() {
 const ResultForm = props => {
   return (
     <React.Fragment>
-      <div className="result">{props.displayData.error ? displayErrorInfo() : displayWeatherInfo(props.displayData)}</div>
+      <div className="Result">{props.displayData.error ? displayErrorInfo() : displayWeatherInfo(props.displayData)}</div>
     </React.Fragment>
   );
 };

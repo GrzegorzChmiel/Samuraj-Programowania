@@ -3,7 +3,7 @@ import InputForm from "./InputForm";
 import ResultForm from "./ResultForm";
 import "./App.css";
 
-//https://www.youtube.com/watch?v=fMB7aNN5ot4&list=PLTs20Q-BTEMNlWqt1sofJj5HDDqNlZy3L&index=6
+//https://www.youtube.com/watch?v=fMB7aNN5ot4&list=PLTs20Q-BTEMNlWqt1sofJj5HDDqNlZy3L&index=7
 
 class App extends React.Component {
   state = {
@@ -43,7 +43,6 @@ class App extends React.Component {
         }
       })
       .then(jsonData => {
-        console.log(jsonData);
         this.setState(actualState => {
           return {
             stationId: jsonData.id_stacji,
