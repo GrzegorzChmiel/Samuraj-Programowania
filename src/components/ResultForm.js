@@ -2,10 +2,10 @@ import React from "react";
 import "./ResultForm.css";
 
 function displayWeatherInfo(displayData) {
-  const { cityName, stationId, stationName, dateAndTime, actualTemperature, actualWindSpeed, windDirection, actualPreassuse, rainfall, humidity, formSubmitted } = displayData;
+  const { cityName, stationId, stationName, dateAndTime, actualTemperature, actualWindSpeed, windDirection, actualPreassuse, rainfall, humidity } = displayData;
 
   let markup = null;
-  if (formSubmitted && cityName !== "") {
+  if (cityName !== "") {
     markup = (
       <div>
         <h3>

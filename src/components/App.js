@@ -3,7 +3,7 @@ import InputForm from "./InputForm";
 import ResultForm from "./ResultForm";
 import "./App.css";
 
-//https://www.youtube.com/watch?v=fMB7aNN5ot4&list=PLTs20Q-BTEMNlWqt1sofJj5HDDqNlZy3L&index=7
+//https://www.youtube.com/watch?v=fMB7aNN5ot4&list=PLTs20Q-BTEMNlWqt1sofJj5HDDqNlZy3L&index=8
 
 class App extends React.Component {
   state = {
@@ -17,21 +17,17 @@ class App extends React.Component {
     actualPreassuse: "",
     rainfall: "",
     humidity: "",
-    error: false,
-    formSubmitted: false
+    error: false
   };
 
   handleCityChange = event => {
     const newState = {
-      cityName: event.target.value,
-      formSubmitted: false
+      cityName: event.target.value
     };
     this.setState(actualState => newState);
   };
 
-  handleInputFormSubmit = event => {
-    event.preventDefault();
-
+  fetchApiData() {
     const URL = `https://danepubliczne.imgw.pl/api/data/synop/station/${this.state.cityName}`;
 
     fetch(URL)
@@ -54,21 +50,25 @@ class App extends React.Component {
             actualPreassuse: jsonData.cisnienie,
             rainfall: parseFloat(jsonData.suma_opadu),
             humidity: jsonData.wilgotnosc_wzgledna,
-            error: false,
-            formSubmitted: true
+            error: false
           };
         });
       })
       .catch(error => {
         console.log(error);
-        this.setState(actualState => {
+        this.setState(prevState => {
           return {
-            error: true,
-            formSubmitted: true
+            error: true
           };
         });
       });
-  };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.cityName !== this.state.cityName) {
+      this.fetchApiData();
+    }
+  }
 
   render() {
     return (
