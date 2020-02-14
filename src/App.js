@@ -51,6 +51,65 @@ class App extends React.Component {
 
    onSubmitHandler(event) {
       event.preventDefault();
+
+      const validationResult = this.validateFormData();
+      if (validationResult.all_ok) {
+         this.resetState();
+      } else {
+         this.displayErrorMessages(validationResult);
+      }
+   }
+
+   resetState() {
+      this.setState({
+         user: "",
+         email: "",
+         pass: "",
+         accept: false,
+
+         validationErrors: {
+            user_error: false,
+            email_error: false,
+            pass_error: false,
+            accept_error: false
+         }
+      });
+   }
+
+   displayErrorMessages(validationResult) {
+      this.setState({
+         validationErrors: {
+            user_error: validationResult.user_error,
+            email_error: validationResult.email_error,
+            pass_error: validationResult.pass_error,
+            accept_error: validationResult.accept_error
+         }
+      });
+   }
+
+   validateFormData() {
+      let user_error = false,
+         email_error = false,
+         pass_error = false,
+         accept_error = false;
+
+      if (this.state.user.length < 10 || this.state.user.indexOf(" ") !== -1) user_error = true;
+
+      if (this.state.email.indexOf("@") === -1) email_error = true;
+
+      if (this.state.pass.length !== 8) pass_error = true;
+
+      accept_error = !this.state.accept;
+
+      const validationErrors = {
+         user_error: user_error,
+         email_error: email_error,
+         pass_error: pass_error,
+         accept_error: accept_error,
+         all_ok: !user_error && !email_error && !pass_error && !accept_error
+      };
+
+      return validationErrors;
    }
 
    render() {
