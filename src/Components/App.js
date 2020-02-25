@@ -19,11 +19,28 @@ class App extends React.Component {
    };
 
    makeTaskDone = taskId => {
-      console.log("makeTaskDone - id: " + taskId);
+      const tasksCopy = [...this.state.tasks];
+      const taskDone = tasksCopy.find(task => task.id === taskId);
+      if (taskDone != null) {
+         taskDone.active = false;
+         taskDone.finishDate = new Date().getTime();
+      }
+
+      this.setState({
+         tasks: tasksCopy
+      });
    };
 
    deleteTask = taskId => {
-      console.log("deleteTask - id: " + taskId);
+      const tasksCopy = [...this.state.tasks];
+      const taskToDeleteId = tasksCopy.findIndex(task => task.id === taskId);
+      if (taskToDeleteId !== -1) {
+         tasksCopy.splice(taskToDeleteId, 1);
+      }
+
+      this.setState({
+         tasks: tasksCopy
+      });
    };
 
    render() {
