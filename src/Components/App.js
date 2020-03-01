@@ -8,7 +8,7 @@ class App extends React.Component {
       tasks: [
          { id: 0, text: "Zagrać wreszcie w Wiedźmina 3", date: "2020-02-15", important: true, active: true, finishDate: null },
          { id: 1, text: "Zrobić dobry uczynek", date: "2020-11-12", important: false, active: true, finishDate: null },
-         { id: 2, text: "Pomalować dom po sylwestrze", date: "2020-09-11", important: false, active: true, finishDate: null },
+         { id: 2, text: "Pomalować dom po sylwestrze", date: "2020-09-11", important: true, active: true, finishDate: null },
          { id: 3, text: "Przytyć 20 kilogramów", date: "2020-05-20", important: true, active: true, finishDate: null },
          { id: 4, text: "sprzedać butelki po piwie (20 skrzynek)", date: "2020-11-12", important: false, active: true, finishDate: null },
          { id: 5, text: "Jeszcze raz pomalować dom", date: "2020-09-11", important: false, active: true, finishDate: null },
