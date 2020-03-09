@@ -8,19 +8,43 @@ class AddTask extends Component {
       priority: false
    };
 
+   handleNewTaskName = evt => {
+      const newState = {
+         newTaskName: evt.target.value
+      };
+
+      this.setState(newState);
+   };
+
+   handlePlannedDate = evt => {
+      const newState = {
+         plannedDate: evt.target.value
+      };
+
+      this.setState(newState);
+   };
+
+   handlePriority = evt => {
+      const newState = {
+         priority: evt.target.checked
+      };
+
+      this.setState(newState);
+   };
+
    render() {
       return (
          <>
             <div className="form">
                <h1>TODO App</h1>
                <label htmlFor="newTaskName">Nazwa zadania </label>
-               <input type="text" placeholder="Nowe zadanie" id="newTaskName" value={this.state.newTaskName}></input>
+               <input type="text" placeholder="Nowe zadanie" id="newTaskName" value={this.state.newTaskName} onChange={this.handleNewTaskName}></input>
                <br />
                <label htmlFor="plannedDate">Planowana data wykonania </label>
-               <input type="date" id="plannedDate" value={this.state.plannedDate}></input>
+               <input type="date" id="plannedDate" value={this.state.plannedDate} onChange={this.handlePlannedDate}></input>
                <br />
                <label htmlFor="priority">Priorytet </label>
-               <input type="checkbox" id="priority" checked={this.state.priority}></input>
+               <input type="checkbox" id="priority" checked={this.state.priority} onChange={this.handlePriority}></input>
                <br />
                <button>Dodaj zadanie</button>
             </div>
