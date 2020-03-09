@@ -32,6 +32,27 @@ class AddTask extends Component {
       this.setState(newState);
    };
 
+   handleAdd = () => {
+      const newTask = {
+         text: this.state.newTaskName,
+         date: this.state.plannedDate,
+         important: this.state.priority
+      };
+
+      const addResult = this.props.addTask(newTask);
+
+      if (addResult) {
+         const resetState = {
+            newTaskName: "",
+            plannedDate: "",
+            priority: false
+         };
+         this.setState(prevState => {
+            return resetState;
+         });
+      }
+   };
+
    render() {
       return (
          <>
@@ -46,7 +67,7 @@ class AddTask extends Component {
                <label htmlFor="priority">Priorytet </label>
                <input type="checkbox" id="priority" checked={this.state.priority} onChange={this.handlePriority}></input>
                <br />
-               <button>Dodaj zadanie</button>
+               <button onClick={this.handleAdd}>Dodaj zadanie</button>
             </div>
             <hr></hr>
          </>

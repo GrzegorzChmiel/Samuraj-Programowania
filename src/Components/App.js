@@ -18,6 +18,39 @@ class App extends React.Component {
       ]
    };
 
+   getNewTaskId = () => {
+      const currentMaxId = this.state.tasks.reduce(this.idReduceFunc, 0);
+      return currentMaxId + 1;
+   };
+
+   idReduceFunc = (maxId, currentObject) => {
+      if (maxId < currentObject.id) {
+         maxId = currentObject.id;
+      }
+      return maxId;
+   };
+
+   addNewTask = taskData => {
+      let addResult = true;
+
+      const newTask = {
+         id: this.getNewTaskId(),
+         text: taskData.text,
+         date: taskData.date,
+         important: taskData.important,
+         active: true,
+         finishDate: null
+      };
+
+      const newTasksTable = [...this.state.tasks, newTask];
+
+      this.setState(prevState => {
+         return { tasks: newTasksTable };
+      });
+
+      return addResult;
+   };
+
    makeTaskDone = taskId => {
       const tasksCopy = [...this.state.tasks];
       const taskDone = tasksCopy.find(task => task.id === taskId);
@@ -47,7 +80,7 @@ class App extends React.Component {
       return (
          <>
             <div className="App">
-               <AddTask></AddTask>
+               <AddTask addTask={this.addNewTask}></AddTask>
                <TaskList tasks={this.state.tasks} makeTaskDoneHandler={this.makeTaskDone} deleteTaskHandler={this.deleteTask}></TaskList>
             </div>
          </>
