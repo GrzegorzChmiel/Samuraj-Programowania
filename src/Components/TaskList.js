@@ -5,11 +5,28 @@ function createTaskItem(task, makeDone, makeDelete) {
    return <Task key={task.id} task={task} makeDoneHandler={makeDone} makeDeleteHandler={makeDelete}></Task>;
 }
 
+function activeTasksSorter(taskA, taskB) {
+   const taskAtext = taskA.text.toLowerCase();
+   const taskBtext = taskB.text.toLowerCase();
+
+   if (taskAtext < taskBtext) return -1;
+
+   if (taskAtext > taskBtext) return 1;
+
+   return 0;
+}
+
+function inactiveTaskSorter(taskA, taskB) {
+   return taskB.finishDate - taskA.finishDate;
+}
+
 const TaskList = props => {
    const activeTasks = props.tasks.filter(task => task.active);
+   activeTasks.sort(activeTasksSorter);
    const activeTaskItems = activeTasks.map(task => createTaskItem(task, props.makeTaskDoneHandler, props.deleteTaskHandler));
 
    const inactiveTasks = props.tasks.filter(task => !task.active);
+   inactiveTasks.sort(inactiveTaskSorter);
    const inactiveTaskItems = inactiveTasks.map(task => createTaskItem(task, props.makeTaskDoneHandler, props.deleteTaskHandler));
 
    return (
