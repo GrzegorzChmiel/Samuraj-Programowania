@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, NavLink, Route } from "react-router-dom";
 
 const Home = () => {
    return <h3>Strona główna</h3>;
@@ -23,13 +23,19 @@ class App extends React.Component {
                   <nav>
                      <ul>
                         <li>
-                           <Link to="/">Strona główna</Link>
+                           <NavLink exact to="/" activeClassName="home_selected">
+                              Strona główna
+                           </NavLink>
                         </li>
                         <li>
-                           <Link to="/News">Aktualności</Link>
+                           <NavLink to="/News" activeClassName="news_selected">
+                              Aktualności
+                           </NavLink>
                         </li>
                         <li>
-                           <Link to="/Contact">Kontakt</Link>
+                           <NavLink to="/Contact" activeClassName="contact_selected">
+                              Kontakt
+                           </NavLink>
                         </li>
                      </ul>
                   </nav>
