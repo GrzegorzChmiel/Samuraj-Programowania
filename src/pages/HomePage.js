@@ -6,20 +6,20 @@ const Articles = [
       id: 1,
       title: "Czym jest teoria strun",
       author: "Jan Nowak",
-      text: "Czym jest teoria strun - objaśnienie."
+      text: "Czym jest teoria strun - objaśnienie.",
    },
    {
       id: 2,
-      title: "Czym jest paradoks fermiego?",
+      title: "Czym jest paradoks Fermiego?",
       author: "Ania Kwiatkowska",
-      text: "Czym jest paradoks fermiego - objaśnienie."
+      text: "Czym jest paradoks fermiego - objaśnienie.",
    },
    {
       id: 3,
       title: "Ciemna materia i ciemna energia?",
       author: "Jan Kowalski",
-      text: "Ciemna materia i ciemna energia - objaśnienie."
-   }
+      text: "Ciemna materia i ciemna energia - objaśnienie.",
+   },
 ];
 
 function convertToArticleComponent(article) {
@@ -27,7 +27,7 @@ function convertToArticleComponent(article) {
 }
 
 const HomePage = () => {
-   const articles = Articles.map(article => convertToArticleComponent(article));
+   const articles = Articles.map((article) => convertToArticleComponent(article));
    return (
       <>
          <div className="home">{articles}</div>
