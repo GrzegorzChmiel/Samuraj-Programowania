@@ -1,5 +1,6 @@
 import React from "react";
 import HomePage from "../pages/HomePage";
+import ProductListPage from "../pages/ProductListPage";
 import ProductPage from "../pages/ProductPage";
 import ContactPage from "../pages/ContactPage";
 import AdminPage from "../pages/AdminPage";
@@ -12,7 +13,8 @@ const Page = () => {
       <>
          <Switch>
             <Route exact path="/" component={HomePage} a></Route>
-            <Route path="/products" component={ProductPage}></Route>
+            <Route path="/products" component={ProductListPage}></Route>
+            <Route path="/product/:name" component={ProductPage}></Route>
             <Route path="/contact" component={ContactPage}></Route>
             <Route path="/admin" component={AdminPage}></Route>
             <Route path="/login" component={LoginPage}></Route>
